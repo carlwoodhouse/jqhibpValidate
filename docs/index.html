@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="jquery.hibp.validate : A simple, lightweight jQuery plugin for validating if a password is part of a haveibeenpwned.com databreach!"
+    />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="cover.css">
+
+
+    <title>jquery.hibp.validate : jquery plugin for haveibeenpwned password breach validation</title>
+</head>
+
+<body>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="inner cover">
+                    <h1 class="cover-heading">jquery.hibp.validate</h1>
+                    <p class="lead">A simple, lightweight jQuery plugin for validating if a password is part of a <a href="https://haveibeenpwned.com">haveibeenpwned.com</a>                        databreach</p>
+                    <p class="lead">
+                        <a href="https://github.com/carlwoodhouse/jquery.hibp.validate" class="btn btn-lg btn-secondary">View on Github</a>
+                    </p>
+
+                    <p class="lead">Test it out below, you can try using the password <span class="badge badge-success">wankybob456789$$3£££</span> 
+                        to find an unpwned password, or simply <span class="badge badge-danger">password</span> to find a pwned one. Why not try one of your own?</p>
+
+                    <div class="p-3">
+                        <form>
+                            <div class="input-group">
+                                <input type="text" class="form-control" data-hibp-validate placeholder="Enter a password">
+                                <span class="input-group-btn"><button type="submit" class="btn btn-secondary btn-pwned">Validate!</button></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="alert alert-danger pwned" role="alert" style="display: none;">
+                        <strong>Oh crumbs!</strong> It looks like you're using a compromised password, try again! or something
+                        ...
+                    </div>
+                    <div class="alert alert-success pwned" role="alert" style="display: none;">
+                        <strong>Awesome!</strong> It looks like you're using a an uncompromised password, good for you!
+                        ...
+                    </div>
+                    <div class="p3">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- GhPages Responsive -->
+                        <ins class="adsbygoogle"
+                            style="display:block"
+                            data-ad-client="ca-pub-9029897445578137"
+                            data-ad-slot="8796790104"
+                            data-ad-format="auto"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>By <a href="https://carlwoodhouse.com" target="_blank">Carl Woodhouse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="jquery.hibp.validate.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-22074952-7"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-22074952-7');
+
+        $(function () {
+            $('form').on('submit', function () {
+                $('.pwned').hide();
+                $(this).find('[data-hibp-validate]').hibpValidate();
+                return false;
+            });
+
+            $('[data-hibp-validate]').on('hibp', function(event, data) {
+                if (data.pwned) {
+                    $('.pwned.alert-danger').show();
+                } else {
+                    $('.pwned.alert-success').show();
+                }
+            });
+        });
+</script>
+</body>
+</html>
